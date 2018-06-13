@@ -1,0 +1,25 @@
+<div class="container">
+
+  <%= render "layouts/errors", :object => @time_slot %>
+
+  <%= form_for @time_slot do |f| %>
+    <div class="field">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+    <br>
+    <div class="field">
+      <%= f.label :start_time %>
+      <%= f.datetime_select :start_time %>
+    </div>
+    <br>
+    <div class="field">
+      <%= f.label :contact_info %>
+      <%= f.text_field :contact_info %>
+    </div>
+    <br>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+</div>
