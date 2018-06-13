@@ -1,3 +1,3 @@
-class LayoutsController < ActionController::Base
+class LayoutsController < ApplicationController
 
 end
