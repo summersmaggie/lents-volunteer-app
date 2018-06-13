@@ -1,0 +1,8 @@
+<div class="container" id="calendar">
+  <%= month_calendar events: @appoinments do |date, appointments| %>
+    <%= date.day %>
+    <% appoinments.each do |appointment| %>
+      <%= link_to appointment.start_time, appointment_path(@appointment) %>
+    <% end %>
+  <% end %>
+</div>
