@@ -15,7 +15,9 @@ class AppointmentsController < ApplicationController
   # GET /appointments/new
   def new
     @appointment = Appointment.new
+    binding.pry
     @time_slot = TimeSlot.find(params[:id])
+    @time_slot_id = @time_slot.id
   end
 
   # GET /appointments/1/edit
