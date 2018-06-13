@@ -1,10 +1,14 @@
 <div class="container" id="calendar">
+  <h2>Available Time Slots</h2>
+  <p>Click a time slot below that works with your schedule to register for an appointment.</p>
+
+  <br>
   <%= month_calendar events: @time_slots do |date, time_slots| %>
     <%= date.day %>
 
     <% time_slots.each do |time_slot| %>
       <div>
-      <%= link_to time_slot.start_time %>
+      <p><%= link_to time_slot.start_time, time_slot_path(time_slot) %> with <%= time_slot.name %></p>
       </div>
     <% end %>
   <% end %>

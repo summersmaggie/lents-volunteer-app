@@ -1,1 +1,1 @@
-Time::DATE_FORMATS[:default]= '%H:%M'
+Time::DATE_FORMATS[:default]= '%I:%M'
