@@ -1,5 +1,8 @@
-<h1>New Appointment</h1>
+<div class="container">
+  <h1>Create a new appointment for <%= @time_slot.start_time %>:</h1>
 
-<%= render 'form', appointment: @appointment %>
+  <%= render 'form' %>
 
-<%= link_to 'Back', appointments_path %>
+  <br>
+  <button><%= link_to 'Back to Calendar', time_slots_path %></button>
+</div>

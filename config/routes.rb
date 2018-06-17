@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  resources :appointments
-  resources :calendars
-  resources :time_slots
+  resources :time_slots do 
+    resources :appointments
+  end
+
   devise_for :users
 
   root :to => 'layouts#home'

@@ -21,6 +21,7 @@ class TimeSlotsController < ApplicationController
   def show
     @time_slots = TimeSlot.all
     @time_slot = TimeSlot.find(params[:id])
+    @time_slot_start_time = @time_slot.start_time
   end
 
   private

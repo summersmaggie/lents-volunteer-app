@@ -10,14 +10,14 @@ class AppointmentsController < ApplicationController
   # GET /appointments/1
   # GET /appointments/1.json
   def show
+    @time_slot = TimeSlot.find(params[:id])
+    @time_slot_id = @time_slot.id
   end
 
   # GET /appointments/new
   def new
-    @appointment = Appointment.new
-    binding.pry
-    @time_slot = TimeSlot.find(params[:id])
-    @time_slot_id = @time_slot.id
+    @time_slot = TimeSlot.find(params[:time_slot_id])
+    @appointment = @time_slot.appointments.new
   end
 
   # GET /appointments/1/edit
@@ -27,16 +27,13 @@ class AppointmentsController < ApplicationController
   # POST /appointments
   # POST /appointments.json
   def create
-    @appointment = Appointment.new(appointment_params)
+    @time_slot = TimeSlot.find(params[:time_slot_id])
+    @appointment = @time_slot.appointments.new(appointment_params)
 
-    respond_to do |format|
-      if @appointment.save
-        format.html { redirect_to @appointment, notice: 'Appointment was successfully created.' }
-        format.json { render :show, status: :created, location: @appointment }
-      else
-        format.html { render :new }
-        format.json { render json: @appointment.errors, status: :unprocessable_entity }
-      end
+    if @appointment.save
+      redirect_to time_slot_path(@appointment.time_slot)
+    else
+      render :new
     end
   end
 
@@ -72,6 +69,6 @@ class AppointmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def appointment_params
-      params.require(:appointment).permit(:name, :start_time, :address, :contact_info)
+      params.require(:appointment).permit(:name, :special_instructions, :address, :contact_info)
     end
 end

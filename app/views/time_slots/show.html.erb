@@ -3,10 +3,31 @@
   <h3>Time Slot Info:</h3>
   <ul>
     <li>Volunteer Neighbor: <%= @time_slot.name %></li>
-    <li>Time: <%= @time_slot.start_time %></li>
-    <li>Date: <%= @time_slot.start_time %></li>
+    <li>Time: <%= @time_slot_start_time.due_at %></li>
+    <li>Date: <%= @time_slot_start_time.due_at_day %></li>
+    <% binding.pry %>
   </ul>
 
-  <p>Sign up for this time slot by <%= link_to "clicking here", new_appointment_path(@time_slot_id) %></p>
+  <% if @time_slot.appointments.any? %>
+  <h4>Here's the appointment for this time slot:</h4>
 
+  <ul>
+    <% @time_slot.appointments.each do |appointment| %>
+      <li>
+        <%= appointment.name %> |
+        <%= appointment.address %> |
+        <%= appointment.special_instructions %> |
+        <%= appointment.contact_info %> |
+        <%= link_to "Edit", edit_time_slot_appointment_path(@time_slot, appointment) %> |
+        <%= link_to "Delete", time_slot_appointment_path(@time_slot, appointment),
+                                 :data => {:confirm => "Are you sure?",
+                                                :method => "delete"} %>
+      </li>
+    <% end %>
+  </ul>
+  <% else %>
+    <p>There's no reservation for this time yet! Sign up <%= link_to "here", new_time_slot_appointment_path(@time_slot) %>.</p></p>
+  <% end %>
+
+  <button><%= link_to 'Back to Calendar', time_slots_path %></button>
 </div>
